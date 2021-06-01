@@ -1,0 +1,1 @@
+Activation of user {{ worker.username }}

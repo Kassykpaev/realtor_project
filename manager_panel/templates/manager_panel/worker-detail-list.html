@@ -1,0 +1,30 @@
+{% extends 'layout/base.html' %}
+
+{% load bootstrap4 %}
+
+{% block title %}{{ worker.first_name }} {{ worker.last_name }} - leads{% endblock %}
+
+{% block content %}
+    <div class="container-fluid mb-2">
+        <div class="row">
+            <div class="col"></div>
+                <form class="col-md-auto form-inline">
+                    {% bootstrap_form form layout='horizontal' %}
+                    {% bootstrap_button content="Search" button_type='submit'%}
+                </form>
+        </div>
+        {% if leads %}
+            <ul>
+                {% for lead in leads %}
+                    <li class="media my-5 p-3 border">
+                        <div class="media-body">
+                            <h3><a href="{% url 'manager_panel:worker-lead-detail' pk=worker.pk id=lead.pk %}">{{ lead.name }}</a></h3>
+                            <div>{{ lead.description }}</div>
+                        </div>
+                    </li>
+                {% endfor %}
+                {% bootstrap_pagination page %}
+            </ul>
+        {% endif %}
+    </div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{% extends 'layout/base.html' %}
+{% load bootstrap4 %}
+
+{% block title %}Options{% endblock %}
+
+{% block content %}
+    <h2><a href="{% url 'head_manager_panel:option-create' %}">Create option</a></h2>
+    <ul>
+        {% for option in options %}
+            <li class="media my-5 p-3">
+                <div class="media-body">
+                    <h3>{{ option.name }}</h3>
+                    <p class="text-right mt-2">
+                        <a href="{% url 'head_manager_panel:option-delete' pk=option.pk %}">Delete option</a>
+                    </p>
+                </div>
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

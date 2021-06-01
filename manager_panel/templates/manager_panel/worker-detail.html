@@ -1,0 +1,16 @@
+{% extends 'layout/base.html' %}
+
+{% load bootstrap4 %}
+
+{% block title %}{{ worker.username }} - detail{% endblock %}
+
+{% block content %}
+    <h1>{{ worker.username }} - detail</h1>
+    <form method="post">
+        {% csrf_token %}
+        {% bootstrap_form form layout='horizontal' %}
+        {% buttons submit='Update' %}{% endbuttons %}
+    </form>
+    <h2><a href="{% url 'manager_panel:worker-statistics' pk=worker.pk %}">Get statistics</a></h2>
+    <h2><a href="{% url 'manager_panel:worker-lead-list' pk=worker.pk%}">See leads</a></h2>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'layout/base.html' %}
+
+{% load bootstrap4 %}
+
+{% block title %}
+    {{ worker.first_name }} {{ worker.last_name }} realtor statistics
+{% endblock %}
+
+{% block content %}
+    <div class="container-fluid mb-2">
+        <div class="row">
+            <div class="col"></div>
+                <form class="col-md-auto form-inline" method="get">
+                    {% bootstrap_form form show_label=False %}
+                    {% bootstrap_button content="Search" button_type='submit'%}
+                </form>
+        </div>
+        {% if leads_count %}<h2>leads_count -- {{ leads_count }}</h2>{% endif %}
+        {% if income %}<h2>income -- {{ income }}</h2>{% endif %}
+        {% if company_income %}<h2>company income -- {{ company_income }}</h2>{% endif %}
+        {% if leads_closed_successfully %}<h2>leads_closed_successfully -- {{ leads_closed_successfully }}</h2>{% endif %}
+        {% if leads_closed_unsuccessfully %}<h2>leads_closed_unsuccessfully -- {{ leads_closed_unsuccessfully }}</h2>{% endif %}
+        {% if leads_in_progress %}<h2>leads_in_progress -- {{ leads_in_progress }}</h2>{% endif %}
+        {% if no_date %}No date{% endif %}
+    </div>
+{% endblock %}

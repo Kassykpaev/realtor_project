@@ -1,0 +1,17 @@
+{% extends 'layout/base.html' %}
+
+{% load bootstrap4 %}
+
+{% block title %}{{ lead.name }}{% endblock %}
+
+{% block content %}
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {% bootstrap_form form layout='horizontal' %}
+        {% bootstrap_formset formset_location layout='horizontal' %}
+        {% bootstrap_formset formset_consumption layout='horizontal' %}
+        {% bootstrap_formset formset_additional_image layout='horizontal' %}
+        {% bootstrap_button content="Update" button_type='submit'%}
+    </form>
+    <a href="{% url 'realtor_panel:lead-delete' pk=lead.pk %}">Delete</a>
+{% endblock %}

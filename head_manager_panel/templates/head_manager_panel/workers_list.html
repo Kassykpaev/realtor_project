@@ -1,0 +1,31 @@
+{% extends 'layout/base.html' %}
+
+{% load bootstrap4 %}
+
+{% block title %}Workers{% endblock %}
+
+{% block content %}
+    <h2><a href="{% url 'head_manager_panel:add-worker' %}">Create new worker</a></h2>
+    <form method="get">
+        {% bootstrap_form form.form layout='horizontal'%}
+        {% buttons submit='Search' %}{% endbuttons %}
+    </form>
+    <ul>
+        {% for worker in workers %}
+            <li class="media my-5 p-3">
+                <div class="media-body">
+                    <h3><a href="{% url 'head_manager_panel:worker-detail' pk=worker.pk %}">{{ worker.username }}</a></h3>
+                    <div>
+                        <p>{{ worker.first_name }} {{ worker.last_name }}</p>
+                        <p>{% if worker.is_active %}<span style="color: green">Active</span>{% else %}<span style="color: red">Not Active</span>{% endif %}</p>
+                        <p>Roles:{% if worker.is_realtor %} Realtor {% endif %}{% if worker.is_manager %} Manager {% endif %}{% if worker.is_head_manager %} Head Manager{% endif %}</p>
+                    </div>
+                    <p class="text-right mt-2">
+                        <a href="{% url 'head_manager_panel:worker-detail' pk=worker.pk %}">View user</a>
+                    </p>
+                </div>
+            </li>
+        {% endfor %}
+        {% bootstrap_pagination page_obj %}
+    </ul>
+{% endblock %}

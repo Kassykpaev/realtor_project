@@ -1,0 +1,16 @@
+{% extends 'layout/base.html' %}
+
+{% load bootstrap4 %}
+
+{% block title %}{{ worker.first_name }} {{ worker.last_name }} - statistics {% endblock %}
+
+{% block content %}
+    <ul>
+    {% if worker.is_realtor %}
+        <li><a href="{% url 'manager_panel:worker-statistics-realtor' pk=worker.pk %}">Realtor statistics</a></li>
+    {% endif %}
+    {% if worker.is_manager %}
+        <li><a href="{% url 'manager_panel:worker-statistics-manager' pk=worker.pk %}">Manager statistics</a></li>
+    {% endif %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends 'layout/base.html' %}
+
+{% load bootstrap4 %}
+
+{% block title %}Delete status{% endblock %}
+
+{% block content %}
+    <p><h2>Are you sure you want to delete option - {{ status.name }}</h2></p>
+    <form method="post">
+        {% csrf_token %}
+        {% buttons submit='Delete' %}{% endbuttons %}
+    </form>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends 'layout/base.html' %}
+
+{% load bootstrap4 %}
+
+{% block title %}All worker statics{% endblock %}
+
+{% block content %}
+    <div class="container-fluid mb-2">
+        <div class="row">
+            <div class="col"></div>
+                <form class="col-md-auto form-inline" method="get">
+                    {% bootstrap_form form show_label=False %}
+                    {% bootstrap_button content="Get" button_type='submit'%}
+                </form>
+        </div>
+    </div>
+{% endblock %}

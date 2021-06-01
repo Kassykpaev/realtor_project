@@ -1,0 +1,57 @@
+{% extends 'layout/base.html' %}
+
+{% load thumbnail %}
+{% load static %}
+{% load bootstrap4 %}
+
+
+{% block title %}{{ user.username }} - profile{% endblock %}
+
+{% block content %}
+    <div class="border py-2">
+        <h1>Your cabinet</h1>
+    </div>
+    <div class="row">
+        <div class="col-2 border">
+        <div>
+            {% if user.image %}
+                <img class="mr-3" src="{% thumbnail user.image 'default' %}">
+            {% else %}
+                <img class="mr-3" src="{% static 'images/empty.jpg' %}">
+            {% endif %}
+        </div>
+        <div>
+            <p><h3>{{ user.first_name }} {{ user.last_name }}</h3></p>
+        </div>
+        <div>
+            <span><h3>Roles: {% if user.is_realtor %}Realtor{% endif %}, {% if user.is_manager %}Manager{% endif %}, {% if user.is_head_manager %}Admin{% endif %}</h3></span>
+        </div>
+        </div>
+        <div class="col-10 border">
+            <div class="row"><h3>Information</h3></div>
+            <div class="row">
+                <div class="col">
+                    <h3>Username: {{ user.username }}</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <h3>First name: {{ user.first_name }}</h3>
+                </div>
+                <div class="col">
+                    <h3>Last name: {{ user.last_name }}</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col"><h3>Email: {{ user.email }}</h3></div>
+                <div class="col"><h3>Phone: {{ user.phone }}</h3></div>
+            </div>
+            <div class="row">
+                <h3>Phone: {{ user.age }}</h3>
+            </div>
+            <div class="row">
+                 <img class="mr-3" src="{% static 'images/graphics.png' %}">
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'layout/base.html' %}
+
+{% load bootstrap4 %}
+
+{% block title %}Delete user{% endblock %}
+
+{% block content %}
+    <h2>Delete user?</h2>
+    <p>Delete user {{ worker.first_name }} {{ worker.last_name }} who has roles: {% if worker.is_realtor %} Realtor {% endif %}{% if worker.is_manager %} Manager {% endif %}{% if worker.is_head_manager %} Head Manager{% endif %}</p>
+    <form method="post">
+        {% csrf_token %}
+        {% buttons submit='Delete' %}{% endbuttons %}
+    </form>
+{% endblock %}

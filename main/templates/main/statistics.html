@@ -1,0 +1,16 @@
+{% extends 'layout/base.html' %}
+
+{% load bootstrap4 %}
+
+{% block title %}{{ user.first_name }} {{ user.last_name }} - statistics {% endblock %}
+
+{% block content %}
+    <ul>
+    {% if request.user.is_realtor %}
+        <li><a href="{% url 'main:realtor-statistics' %}">Realtor statistics</a></li>
+    {% endif %}
+    {% if request.user.is_manager %}
+        <li><a href="{% url 'main:manager-statistics' %}">Manager statistics</a></li>
+    {% endif %}
+    </ul>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'layout/base.html' %}
+
+{% load bootstrap4 %}
+
+{% block title %}Delete lead{% endblock %}
+
+{% block content %}
+    <h2>Delete lead</h2>
+    <p>Are you sure you want to delete this lead</p>
+    <form method="post">
+        {% csrf_token %}
+        {% buttons submit='Delete' %}{% endbuttons %}
+    </form>
+{% endblock %}

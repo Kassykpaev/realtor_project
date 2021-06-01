@@ -1,0 +1,10 @@
+Dear user {{ worker.username }}
+
+You almost finished signing up in "Adverts.io".
+For finishing the registration you should verify your account.
+For verifying just click the link bellow:
+
+{{ host }}{% url 'head_manager_panel:worker-activate' sign=sign %}
+
+Good bye!
+With all respect administration of web-page

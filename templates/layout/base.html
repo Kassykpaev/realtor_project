@@ -1,0 +1,56 @@
+{% load bootstrap4 %}
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}Main{% endblock %}</title>
+    {% bootstrap_css %}
+
+    <link rel="stylesheet" type="text/css" href="{% static 'main/style.css' %}">
+    {% bootstrap_javascript jquery='slim' %}
+</head>
+<body class="container-fluid">
+    {% if request.user.is_authenticated  %}
+    <div class="row">
+        <ul class="col nav justify-content-end border px-5">
+            <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">{{ user.first_name }} {{ user.last_name }}</a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item pr-1 pl-1" href="{% url 'main:profile' %}">Profile</a>
+                    {% if request.user.is_realtor %}
+                        <a class="dropdown-item pr-1 pl-1" href="{% url 'main:realtor-statistics' %}">Realtor statistics</a>
+                    {% endif %}
+                    {% if request.user.is_manager %}
+                        <a class="dropdown-item pr-1 pl-1" href="{% url 'main:manager-statistics' %}">Manager statistics</a>
+                    {% endif %}
+                    <a class="dropdown-item pl-1 pr-1" href="{% url 'main:password_change' %}">Change password</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item pl-1 pr-1" href="{% url 'main:logout' %}">Exit</a>
+                </div>
+            </li>
+        </ul>
+    </div>
+    {% endif %}
+    <div class="row">
+        {% if user.is_authenticated %}
+            <nav class="col-md-auto nav flex-column border">
+                <a class="nav-link" href="{% url 'realtor_panel:lead-list' %}">Realtor panel</a>
+                {% if  user.is_manager %}
+                    <a class="nav-link" href="{% url 'manager_panel:workers-list' %}">Manager panel</a>
+                {% endif %}
+                {% if user.is_head_manager %}
+                    <a class="nav-link" href="{% url 'head_manager_panel:worker-list' %}">Admin panel</a>
+                {% endif %}
+            </nav>
+        {% endif %}
+        <section class="col border py-2">
+            {% bootstrap_messages %}
+            {% block content %}
+            {% endblock %}
+        </section>
+    </div>
+</body>
+</html>
