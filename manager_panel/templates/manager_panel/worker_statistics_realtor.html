@@ -9,11 +9,15 @@
 {% block content %}
     <div class="container-fluid mb-2">
         <div class="row">
-            <div class="col"></div>
+            <div class="col">
+                <h1>Your Realtor Statistics</h1>
+            </div>
+            <div class="col">
                 <form class="col-md-auto form-inline" method="get">
                     {% bootstrap_form form show_label=False %}
-                    {% bootstrap_button content="Search" button_type='submit'%}
+                    {% bootstrap_button content="GET" button_type='submit'%}
                 </form>
+            </div>
         </div>
         {% if leads_count %}<h2>leads_count -- {{ leads_count }}</h2>{% endif %}
         {% if income %}<h2>income -- {{ income }}</h2>{% endif %}

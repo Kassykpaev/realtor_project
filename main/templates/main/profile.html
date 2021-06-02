@@ -8,49 +8,49 @@
 {% block title %}{{ user.username }} - profile{% endblock %}
 
 {% block content %}
-    <div class="border py-2">
+    <div>
         <h1>Your cabinet</h1>
     </div>
     <div class="row">
         <div class="col-2 border">
-        <div>
+        <div class="py-3 px-2">
             {% if user.image %}
                 <img class="mr-3" src="{% thumbnail user.image 'default' %}">
             {% else %}
                 <img class="mr-3" src="{% static 'images/empty.jpg' %}">
             {% endif %}
         </div>
-        <div>
+        <div class="py-3">
             <p><h3>{{ user.first_name }} {{ user.last_name }}</h3></p>
         </div>
-        <div>
+        <div class="py-3">
             <span><h3>Roles: {% if user.is_realtor %}Realtor{% endif %}, {% if user.is_manager %}Manager{% endif %}, {% if user.is_head_manager %}Admin{% endif %}</h3></span>
         </div>
         </div>
         <div class="col-10 border">
-            <div class="row"><h3>Information</h3></div>
+            <div class="row"><div class="col py-3"><h3>Information</h3></div></div>
             <div class="row">
-                <div class="col">
+                <div class="col py-3">
                     <h3>Username: {{ user.username }}</h3>
                 </div>
             </div>
             <div class="row">
-                <div class="col">
+                <div class="col py-3">
                     <h3>First name: {{ user.first_name }}</h3>
                 </div>
-                <div class="col">
+                <div class="col py-3">
                     <h3>Last name: {{ user.last_name }}</h3>
                 </div>
             </div>
             <div class="row">
-                <div class="col"><h3>Email: {{ user.email }}</h3></div>
-                <div class="col"><h3>Phone: {{ user.phone }}</h3></div>
+                <div class="col py-3"><h3>Email: {{ user.email }}</h3></div>
+                <div class="col py-3"><h3>Phone: {{ user.phone }}</h3></div>
             </div>
             <div class="row">
-                <h3>Phone: {{ user.age }}</h3>
+                <div class="col py-3"><h3>Phone: {{ user.age }}</h3></div>
             </div>
             <div class="row">
-                 <img class="mr-3" src="{% static 'images/graphics.png' %}">
+                <div class="col py-3"><img class="mr-3" src="{% static 'images/graphics.png' %}" width="500" height="400"></div>
             </div>
         </div>
     </div>
