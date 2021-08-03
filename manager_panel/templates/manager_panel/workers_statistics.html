@@ -1,5 +1,7 @@
 {% extends 'layout/base.html' %}
 
+{% load thumbnail %}
+{% load static %}
 {% load bootstrap4 %}
 
 {% block title %}All worker statics{% endblock %}
@@ -7,11 +9,63 @@
 {% block content %}
     <div class="container-fluid mb-2">
         <div class="row">
-            <div class="col"></div>
+            <div class="col">
+                <h1>All workers statistics</h1>
+            </div>
+            <div class="col">
                 <form class="col-md-auto form-inline" method="get">
                     {% bootstrap_form form show_label=False %}
-                    {% bootstrap_button content="Get" button_type='submit'%}
+                    {% bootstrap_button content="GET" button_type='submit'%}
                 </form>
+            </div>
         </div>
+        {% for worker in workers %}
+        <div class="row">
+            <div class="col-2 border">
+                <div class="py-3 px-2">
+                    {% if worker.image %}
+                        <img class="mr-3" src="{% thumbnail worker.image 'default' %}">
+                    {% else %}
+                        <img class="mr-3" src="{% static 'images/empty.jpg' %}">
+                    {% endif %}
+                </div>
+                <div class="py-3">
+                    <p><h3>{{ worker.first_name }} {{ worker.last_name }}</h3></p>
+                </div>
+                <div class="py-3">
+                    <span><h3>Roles: {% if worker.is_realtor %}Realtor{% endif %}, {% if worker.is_manager %}Manager{% endif %}, {% if worker.is_head_manager %}Admin{% endif %}</h3></span>
+                </div>
+            </div>
+            <div class="col-10 border">
+                {% if worker.is_realtor %}
+                <div class="row border">
+                    <div class="col">
+                        <div class="row"><div class="col"><h2><b>Realtor statistics</b></h2></div></div>
+                        <div class="row"><div class="col"><h2>Leads count {% if leads_count %}{{ leads_count }}{% else %}---{% endif %}</h2></div></div>
+                        <div class="row"><div class="col"><h2>Kpi {% if kpi %}{{ kpi }}%{% else %}---{% endif %}</h2></div></div>
+                        <div class="row"><div class="col"><h2>Income {% if income %}{{ income }}{% else %}---{% endif %}</h2></div></div>
+                        <div class="row"><div class="col"><h2>Company income {% if company_income %}{{ company_income }}{% else %}---{% endif %}</h2></div></div>
+                        <div class="row"><div class="col"><h2>Leads closed successfully {% if leads_closed_successfully %}{{ leads_closed_successfully }}{% else %}---{% endif %}</h2></div></div>
+                        <div class="row"><div class="col"><h2>Leads closed unsuccessfully {% if leads_closed_unsuccessfully %}{{ leads_closed_unsuccessfully }}{% else %}---{% endif %}</h2></div></div>
+                        <div class="row"><div class="col"><h2>Leads in progress {% if leads_in_progress %}{{ leads_in_progress }}{% else %}---{% endif %}</h2></div></div>
+                    </div>
+                </div>
+                {% endif %}
+                {% if worker.is_manager %}
+                <div class="row">
+                    <div class="col">
+                        <div class="row"><div class="col"><h2><b>Manager statistics</b></h2></div></div>
+                        <div class="row"><div class="col"><h2>Leads closed unsuccessfully average {% if leads_closed_unsuccessfully_avg %}{{ leads_closed_unsuccessfully_avg }}%{% else %}---{% endif %}</h2></div></div>
+                        <div class="row"><div class="col"><h2>Leads closed successfully average {% if leads_closed_successfully_avg %}{{ leads_closed_successfully_avg }}{% else %}---{% endif %}</h2></div></div>
+                        <div class="row"><div class="col"><h2>Company income {% if company_income %}{{ company_income }}{% else %}---{% endif %}</h2></div></div>
+                        <div class="row"><div class="col"><h2>Leads closed successfully {% if leads_closed_successfully %}{{ leads_closed_successfully }}{% else %}---{% endif %}</h2></div></div>
+                        <div class="row"><div class="col"><h2>Leads closed unsuccessfully {% if leads_closed_unsuccessfully %}{{ leads_closed_unsuccessfully }}{% else %}---{% endif %}</h2></div></div>
+                        <div class="row"><div class="col"><h2>Leads in progress {% if leads_in_progress %}{{ leads_in_progress }}{% else %}---{% endif %}</h2></div></div>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
+        </div>
+        {% endfor %}
     </div>
 {% endblock %}

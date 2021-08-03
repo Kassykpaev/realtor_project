@@ -132,7 +132,7 @@ def worker_statistics_manager(request , pk):
         context['no_date'] = 'lol'
     context['form'] = form
     context['worker'] = worker
-    return render(request , 'manager_panel/worker_statistics_manager.html', context)
+    return render(request, 'manager_panel/worker_statistics_manager.html', context)
 
 
 @login_required
@@ -161,4 +161,17 @@ def get_workers_statistics(request):
         except Exception:
             raise Http404
     else:
-        return render(request, 'manager_panel/workers_statistics.html', {'form': DateRangeForm()})
+        user = Worker.objects.get(id=request.user.id)
+        workers = user.worker_set.all()
+        context = {}
+        if 'start_date' in request.GET and 'end_date' in request.GET:
+            start_date = request.GET['start_date']
+            end_date = request.GET['end_date']
+            context = get_manager_statistics(user, start_date=start_date, end_date=end_date)
+            form = DateRangeForm(initial={'start_date': start_date, 'end_date': end_date})
+        else:
+            form = DateRangeForm()
+            context['no_date'] = 'lol'
+        context['form'] = form
+        context['workers'] = workers
+        return render(request, 'manager_panel/workers_statistics.html', context)

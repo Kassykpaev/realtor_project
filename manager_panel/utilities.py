@@ -49,7 +49,7 @@ def get_realtor_statistics(worker, start_date, end_date):
             else:
                 tmp -= cons.cost
         context['income'] += tmp
-
+    context['kpi'] = 81.93
     context['leads_closed_successfully'] = len(queryset.filter(status__name='Successful close'))
     context['leads_closed_unsuccessfully'] = len(queryset.filter(status__name='Unsuccessful close'))
     context['leads_in_progress'] = context['leads_count'] - context['leads_closed_successfully'] - context['leads_closed_unsuccessfully']

@@ -79,6 +79,7 @@ def realtor_statistics(request):
         form = DateRangeForm()
         context['no_date'] = 'lol'
     context['form'] = form
+    context['user'] = Worker.objects.get(id=request.user.id)
 
     return render(request, 'main/statistics_realtor.html', context)
 
